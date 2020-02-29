@@ -6,7 +6,7 @@ import Admin from './pages/admin/admin.js'
 export default function App() {
   return (
     <div>
-      <BrowserRouter basename='/app'>
+      <BrowserRouter basename='/react'>
         <Switch>
           <Route path="/login" component={Login}></Route>
           <Route path="/" component={Admin}></Route>

@@ -8,11 +8,13 @@
     "@testing-library/user-event": "^7.2.1",
     "antd": "^4.0.0",
     "axios": "^0.19.2",
+    "http-proxy-middleware": "^1.0.1",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.0",
-    "serve": "^11.3.0"
+    "serve": "^11.3.0",
+    "store": "^2.0.12"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -35,6 +37,6 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "http://www.tuppy.pub:3000/app",
-  "proxy": "http://localhost:8080"
+  "homepage": "./",
+  "proxy": "http://47.100.39.201:8080"
 }
