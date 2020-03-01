@@ -7,7 +7,7 @@ export default {
             store.set(USER_KEY, user)
      },
      getUser(){
-           return store.get(USER_KEY) || {}
+           return store.get(USER_KEY) || null
      },
      removeUser(){
            store.remove(USER_KEY)

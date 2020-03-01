@@ -3,23 +3,26 @@ import ReactDom from "react-dom";
 import { Redirect } from "react-router-dom";
 import ajax from "../../utils/ajaxUtil.js";
 import Admin from "../admin/admin.js";
-import User from "../../utils/memoryUtil";
+import Memory from "../../utils/memoryUtil";
 import Store from "../../utils/storeUtil";
 import { Form, Input, Button } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
+import "./login.css";
+
+Memory.user = Store.getUser();
 
 class Login extends React.Component {
   onFinish = values => {
     var res = ajax(
-      "/login",
+      "/api/login",
       { name: values.name, place: values.place },
       "POST"
     );
     res
       .then(value => {
-        User.user = value.data;
-        if (User.user !== "") {
-          Store.saveUser(User.user);
+        Memory.user = value.data;
+        if (Memory.user !== "") {
+          Store.saveUser(Memory.user);
           ReactDom.render(<Admin />, document.getElementById("root"));
         } else console.log("not a user");
       })
@@ -29,54 +32,40 @@ class Login extends React.Component {
     console.log(res);
   };
   render() {
+    if (Memory.user !== null) return <Redirect to="/"></Redirect>;
     return (
-      <Form
-        name="normal_login"
-        className="login-form"
-        initialValues={{
-          remember: true
-        }}
-        onFinish={this.onFinish}
-        onFinishFailed={this.failSubmit}
-      >
-        <Form.Item
-          name="name"
-          rules={[
-            {
-              required: true,
-              message: "Please input your name!"
-            }
-          ]}
-        >
-          <Input
-            prefix={<UserOutlined className="site-form-item-icon" />}
-            placeholder="名字"
-          />
-        </Form.Item>
-        <Form.Item
-          name="place"
-          rules={[
-            {
-              required: true,
-              message: "Please input your plcae!"
-            }
-          ]}
-        >
-          <Input
-            prefix={<LockOutlined className="site-form-item-icon" />}
-            placeholder="输入组织（学校）"
-          />
-        </Form.Item>
-        <Form.Item>
-          <Button
-            type="primary"
-            htmlType="submit"
-            className="login-form-button"
+      <div className='login'>
+
+        <section className="form">
+          <p className='font'>医路随学</p>
+          <Form
+            name="normal_login"
+            className="login-form"
+            initialValues={{
+              remember: true
+            }}
+            onFinish={this.onFinish}
+            onFinishFailed={this.failSubmit}
           >
-            登录
-          </Button>
-        </Form.Item>
-      </Form>
+            <Form.Item name="name">
+              <Input className='input' placeholder="名字" />
+            </Form.Item>
+
+            <Form.Item name="place">
+              <Input className='input' placeholder="输入组织（学校）" />
+            </Form.Item>
+            <Form.Item>
+              <Button
+                type="primary"
+                htmlType="submit"
+                className="login-form-button"
+              >
+                登录
+              </Button>
+            </Form.Item>
+          </Form>
+        </section>
+      </div>
     );
   }
 }
