@@ -1,12 +1,11 @@
 import React from "react";
 import ReactDom from "react-dom";
 import { Redirect } from "react-router-dom";
-import ajax from "../../utils/ajaxUtil.js";
-import Admin from "../admin/admin.js";
+import ajax from "../../utils/ajaxUtil";
+import Admin from "../admin/admin";
 import Memory from "../../utils/memoryUtil";
 import Store from "../../utils/storeUtil";
 import { Form, Input, Button } from "antd";
-import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import "./login.css";
 
 Memory.user = Store.getUser();
