@@ -4,28 +4,34 @@ import Store from "../../utils/storeUtil";
 import { Redirect, Route, Switch, BrowserRouter } from "react-router-dom";
 import { Layout, Menu, Modal, Button } from "antd";
 import Students from "../students/students";
+import Detail from "../detail/detail";
 import "./admin.css";
-import {createBrowserHistory} from 'history';
-const history = createBrowserHistory()
+import { createBrowserHistory } from "history";
+const history = createBrowserHistory();
 const { Header, Footer, Content } = Layout;
 
 Memory.user = Store.getUser();
 
 export default class Admin extends React.Component {
+onClickMenu = e => {
+  console.log(e)
+  history.push(e.key)
+  history.go()
+}
+
   logout = () => {
     Modal.confirm({
       title: "提示!",
       content: "你确定要登出吗？",
       onOk: () => {
-          Store.removeUser()
-          history.push('/login')
-          history.go()
+        Store.removeUser();
+        history.push("/login");
+        history.go();
       }
     });
   };
 
   render() {
-    console.log(Memory.user);
     if (Memory.user === null) return <Redirect to="/login" />;
 
     return (
@@ -36,16 +42,23 @@ export default class Admin extends React.Component {
           <Menu
             theme="dark"
             mode="horizontal"
-            defaultSelectedKeys={["1"]}
+            defaultSelectedKeys={["/students"]}
             style={{ lineHeight: "64px" }}
           >
-            <Menu.Item key="1">学生列表</Menu.Item>
+            <Menu.Item key="/students" onClick={this.onClickMenu}>
+                <span>学生列表</span>
+            </Menu.Item>
+            <Menu.Item key="/newWork" onClick={this.onClickMenu}>
+                <span>新建作业</span>
+            </Menu.Item>
             {/* <Menu.Item key="2">nav 2</Menu.Item>
                         <Menu.Item key="3">nav 3</Menu.Item> */}
           </Menu>
           <div className="name">
-            <span >你好,{Memory.user.name} &nbsp;</span>
-            <Button className="button" onClick={this.logout} >登出</Button>
+            <span>你好,{Memory.user.name} &nbsp;</span>
+            <Button className="button" onClick={this.logout}>
+              登出
+            </Button>
           </div>
         </Header>
         <Content style={{ padding: "0 50px" }}>
@@ -53,6 +66,7 @@ export default class Admin extends React.Component {
             <BrowserRouter>
               <Switch>
                 <Route path="/students" component={Students}></Route>
+                <Route path="/detail" component={Detail}></Route>
                 <Redirect to="/students"></Redirect>
               </Switch>
             </BrowserRouter>
