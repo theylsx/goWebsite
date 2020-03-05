@@ -1,10 +1,12 @@
-import { Select, Input, Button, Steps } from "antd";
+import { Select, Input, Button, Steps, Modal } from "antd";
 import React from "react";
 import Memory from "../../utils/memoryUtil";
 import Store from "../../utils/storeUtil";
 import ajax from "../../utils/ajaxUtil";
 import "./new-work.css";
+import { createBrowserHistory } from "history";
 
+const history = createBrowserHistory();
 const { Step } = Steps;
 const { Option } = Select;
 Memory.user = Store.getUser();
@@ -60,8 +62,13 @@ export default class NewWork extends React.Component {
       },
       "POST"
     ).then(res => {
-      console.log(res.data);
-    });
+      history.push("/student")
+      history.go()
+    }).catch(err => {
+      Modal.confirm(
+        {title:"请填写所有信息"}
+      )
+    })
   };
 
   onChange = value => {
