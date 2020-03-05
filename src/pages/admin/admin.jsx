@@ -7,12 +7,19 @@ import Students from "../students/students";
 import Detail from "../detail/detail";
 import "./admin.css";
 import { createBrowserHistory } from "history";
+import NewWork from "../new-work/new-work";
 const history = createBrowserHistory();
 const { Header, Footer, Content } = Layout;
 
 Memory.user = Store.getUser();
 
 export default class Admin extends React.Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      key: '/students'
+    }
+  }
 onClickMenu = e => {
   console.log(e)
   history.push(e.key)
@@ -42,7 +49,6 @@ onClickMenu = e => {
           <Menu
             theme="dark"
             mode="horizontal"
-            defaultSelectedKeys={["/students"]}
             style={{ lineHeight: "64px" }}
           >
             <Menu.Item key="/students" onClick={this.onClickMenu}>
@@ -51,8 +57,6 @@ onClickMenu = e => {
             <Menu.Item key="/newWork" onClick={this.onClickMenu}>
                 <span>新建作业</span>
             </Menu.Item>
-            {/* <Menu.Item key="2">nav 2</Menu.Item>
-                        <Menu.Item key="3">nav 3</Menu.Item> */}
           </Menu>
           <div className="name">
             <span>你好,{Memory.user.name} &nbsp;</span>
@@ -61,17 +65,16 @@ onClickMenu = e => {
             </Button>
           </div>
         </Header>
-        <Content style={{ padding: "0 50px" }}>
-          <div className="site-layout-content">
+        <div className='content'>
             <BrowserRouter>
               <Switch>
                 <Route path="/students" component={Students}></Route>
                 <Route path="/detail" component={Detail}></Route>
+                <Route path="/newWork" component={NewWork}></Route>
                 <Redirect to="/students"></Redirect>
               </Switch>
             </BrowserRouter>
-          </div>
-        </Content>
+        </div>
         <Footer style={{ textAlign: "center" }}>Created by goWithU</Footer>
       </Layout>
     );
