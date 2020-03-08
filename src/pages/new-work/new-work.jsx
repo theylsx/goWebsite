@@ -228,10 +228,6 @@ export default class NewWork extends React.Component {
                 onFocus={this.onFocus}
                 onBlur={this.onBlur}
                 onSearch={this.onSearch}
-                // filterOption={(input, option) =>
-                //   option.children.toLowerCase().indexOf(input.toLowerCase()) >=
-                //   0
-                // }
               >
                 {opts}
               </Select>
@@ -247,10 +243,6 @@ export default class NewWork extends React.Component {
                 onFocus={this.onFocus}
                 onBlur={this.onBlur}
                 onSearch={this.onSearch}
-                // filterOption={(input, option) =>
-                //   option.children.toLowerCase().indexOf(input.toLowerCase()) >=
-                //   0
-                // }
               >
                 {count}
               </Select>
