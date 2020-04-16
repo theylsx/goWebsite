@@ -1,8 +1,9 @@
 import React from 'react'
-import { List, Avatar, Button} from 'antd';
-import { MessageOutlined, FormOutlined} from '@ant-design/icons';
+import { List, Avatar, Button } from 'antd';
+import { MessageOutlined, FormOutlined, NotificationTwoTone } from '@ant-design/icons';
 import "./community.css"
 import { createBrowserHistory } from "history";
+import ajax from "../../utils/ajaxUtil"
 const history = createBrowserHistory();
 
 const listData = [];
@@ -25,7 +26,29 @@ const IconText = ({ icon, text }) => (
     </span>
 );
 export default class Community extends React.Component {
-    onClick(){
+
+    constructor(props) {
+        super(props)
+        this.state = {
+            list: []
+        }
+    }
+
+    componentDidMount() {
+        var res = ajax("/api/getAllPost", {}, "GET")
+        res.then(value => {
+            // console.log("success:" +  JSON.stringify(value))
+            var str = JSON.stringify(value)
+            var obj = JSON.parse(str)
+            console.log(obj.data.list)
+            this.setState({
+                list: obj.data.list
+            })
+        }).catch(res => {
+            console.log(res)
+        })
+    }
+    onClick() {
         history.push('/post')
         history.go()
         console.log("onClick")
@@ -34,15 +57,16 @@ export default class Community extends React.Component {
         return (
             <div className="container">
                 <div className="post-util">
-                    <Button type="primary" shape="round" icon={<FormOutlined/>} size="large" onClick={this.onClick}>发布</Button>
+                    <Button type="primary" shape="round" icon={<FormOutlined />} size="large" onClick={this.onClick}>发布</Button>
                 </div>
                 <div className="list">
                     <List
                         itemLayout="vertical"
                         size="large"
-                        dataSource={listData}
+                        dataSource={this.state.list}
                         renderItem={item => (
                             <List.Item
+                            className="listItem"
                                 key={item.title}
                                 actions={[
                                     // <IconText icon={StarOutlined} text="156" key="list-vertical-star-o" />,
@@ -50,9 +74,9 @@ export default class Community extends React.Component {
                                     <IconText icon={MessageOutlined} text="2" key="list-vertical-message" />,
                                 ]}>
                                 <List.Item.Meta
-                                    avatar={<Avatar src={item.avatar} />}
+                                    avatar={<Avatar src={"../../icon/post.png"} />}
                                     title={<a onClick={this.onClick} href={item.href}>{item.title}</a>}
-                                    description={item.description} />
+                                    description={item.date} />
                                 {item.content}
                             </List.Item>)}
                     />

@@ -10,8 +10,23 @@ const history = createBrowserHistory();
 Memory.user = Store.getUser()
 export default class Post extends React.Component {
 
-    onFinish = value => {
-        console.log(value)
+  
+
+    onFinish = values => {
+        var date = new Date()
+        console.log(date.toLocaleString())
+        var res = ajax(
+            "/api/post",
+            { Content: values.content, Title: values.postTitle, Date: date.toLocaleString(), OpenId: Memory.user.openId, UserAvatar: 'no avatar'},
+            "POST"
+        );
+        res
+            .then(value => {
+                console.log(value)
+                history.push('/community')
+                history.go()
+            })
+            .catch(res => console.log(res))
     }
 
 

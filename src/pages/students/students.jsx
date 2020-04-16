@@ -41,7 +41,7 @@ export default class Students extends React.Component {
           <List.Item>
             <List.Item.Meta
               avatar={<Avatar src="../../icon/student.png" />}
-              title={<a href="https://ant.design">{item.name}</a>}
+              title={<a href="">{item.name}</a>}
               description={item.hospital + " " + item.information}
             ></List.Item.Meta>
             <Button type="primary" id={item.openId} onClick={this.onClick}>
