@@ -1,7 +1,19 @@
 @import "../../../node_modules/antd/dist/antd.css";
 
+.container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
 .myList {
-  width: 600px;
-  padding-top: 0.6rem;
-  margin: auto;
+  width: 800px;
+}
+
+.listBack {
+  display: flex;
+  width: 950px;
+  margin-top: 50px;
+  background-color: rgba(245, 245, 245, 0.603);
+  box-shadow: 0 0 .25rem rgba(95, 95, 95, .48);
 }
