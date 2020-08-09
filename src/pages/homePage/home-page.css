@@ -1,0 +1,54 @@
+.home_header {
+    display: flex;
+    background-color: white;
+    border-bottom: 1px solid #ced4da;
+}
+
+.home_logo {
+    color: #1890ff;
+    font-weight: bold;
+    font-size: 30px;
+    flex: 1;
+}
+
+.menu_container {
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+    flex: 2;
+}
+
+.button_container {
+    display: flex;
+    justify-content: flex-end;
+    margin: auto;
+    flex: 1;
+}
+
+.login_button {
+    margin-right: 5px;
+}
+
+.list_container {
+    border: 1px solid #007bff;
+}
+
+.home_content {
+    background-color: #ffffff;
+    width: 718px;
+    margin: 0 auto;
+}
+
+.h1 {
+    height: 160px;
+    width: 718px;
+    color: #fff;
+    line-height: 160px;
+    text-align: center;
+    background: #364d79;
+}
+
+.divider {
+    font-weight: bold !important;
+    color: #007bff !important;
+}
