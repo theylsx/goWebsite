@@ -10,6 +10,7 @@ import Detail from "../detail/detail";
 import NewWork from "../new-work/new-work";
 // import OnlineLearning from "../onlineLearning/onlineLearning";
 import Post from "../post/post";
+import HomePage from "../homePage/home-page";
 import "./admin.css";
 const history = createBrowserHistory();
 const { Header, Footer } = Layout;
@@ -20,7 +21,7 @@ export default class Admin extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      key: "/students",
+      key: "/homepage",
     };
     console.log(this);
   }
@@ -59,8 +60,11 @@ export default class Admin extends React.Component {
               theme="light"
               mode="horizontal"
               style={{ lineHeight: "64px" }}
-              defaultSelectedKeys={["/students"]}
+              defaultSelectedKeys={[]}
             >
+              <Menu.Item key="/homepage" onClick={this.onClickMenu}>
+                <span>首页</span>
+              </Menu.Item>
               <Menu.Item key="/students" onClick={this.onClickMenu}>
                 <span>学生列表</span>
               </Menu.Item>
@@ -97,7 +101,8 @@ export default class Admin extends React.Component {
               {/* <Route path="/onLineLearning" component={OnlineLearning}></Route> */}
               <Route path="/post" component={Post}></Route>
               <Route path="/community" component={Community}></Route>
-              <Redirect to="/students"></Redirect>
+              <Route path="/homepage" component={HomePage}></Route>
+              <Redirect to="/homepage"></Redirect>
             </Switch>
           </BrowserRouter>
         </div>
