@@ -8,6 +8,7 @@ import Students from "../students/students";
 import Community from "../community/community";
 import Detail from "../detail/detail";
 import NewWork from "../new-work/new-work";
+import NewContextWork from "../newContextWork/newContextWork";
 // import OnlineLearning from "../onlineLearning/onlineLearning";
 import Post from "../post/post";
 import HomePage from "../homePage/home-page";
@@ -71,6 +72,9 @@ export default class Admin extends React.Component {
               <Menu.Item key="/newWork" onClick={this.onClickMenu}>
                 <span>新建作业</span>
               </Menu.Item>
+              <Menu.Item key="/newContextWork" onClick={this.onClickMenu}>
+                <span>新建文本作业</span>
+              </Menu.Item>
               {/* <Menu.Item key="/onlineLearning" onClick={this.onClickMenu}>
                 <span>在线学习</span>
               </Menu.Item> */}
@@ -100,6 +104,7 @@ export default class Admin extends React.Component {
               <Route path="/newWork" component={NewWork}></Route>
               {/* <Route path="/onLineLearning" component={OnlineLearning}></Route> */}
               <Route path="/post" component={Post}></Route>
+              <Route path="/newContextWork" component={NewContextWork}></Route>
               <Route path="/community" component={Community}></Route>
               <Route path="/homepage" component={HomePage}></Route>
               <Redirect to="/homepage"></Redirect>
