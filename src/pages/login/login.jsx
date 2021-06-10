@@ -1,21 +1,22 @@
 import React from "react";
 import ReactDom from "react-dom";
 import { Redirect } from "react-router-dom";
+import { Form, Input, Button } from "antd";
+
 import ajax from "../../utils/ajaxUtil";
 import Admin from "../admin/admin";
 import Memory from "../../utils/memoryUtil";
 import Store from "../../utils/storeUtil";
-import { Form, Input, Button } from "antd";
 import "./login.css";
 
 Memory.user = Store.getUser();
 
 class Login extends React.Component {
   onFinish = (values) => {
-    var res = ajax(
-      "/api/login",
-      { name: values.name, place: values.place },
-      "POST"
+    const res = ajax(
+        "/api/login",
+        {name: values.name, place: values.place},
+        "POST"
     );
     res
       .then((value) => {
@@ -23,7 +24,7 @@ class Login extends React.Component {
         if (Memory.user !== "") {
           Store.saveUser(Memory.user);
           ReactDom.render(<Admin />, document.getElementById("root"));
-        } else console.log("not a user");
+        } else alert("not a user");
       })
       .catch((res) => console.log(res));
   };
